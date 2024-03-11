@@ -3,10 +3,6 @@ version: '3.4'
 services:
   mysql:
     image: mysql:8.0
-    # command: --default-authentication-plugin=mysql_native_password
-    # vulnerable
-    # ports: 
-    #   - 3306:3306
     environment: 
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - MYSQL_DATABASE=${MYSQL_DATABASE}
@@ -35,10 +31,10 @@ services:
   prestashop:
     image: prestashop/prestashop:8
     environment: 
-      - DB_SERVER=mysql
-      - DB_NAME=${MYSQL_DATABASE}
-      - DB_USER=${MYSQL_USER}
-      - DB_PASSWORD=${MYSQL_PASSWORD}
+      - PRESTASHOP_DATABASE_HOST=mysql
+      - PRESTASHOP_DATABASE_NAME=${MYSQL_DATABASE}
+      - PRESTASHOP_DATABASE_USER=${MYSQL_USER}
+      - PRESTASHOP_DATABASE_PASSWORD=${MYSQL_PASSWORD}
     volumes:
       - prestashop_data:/var/www/html
     networks: 
